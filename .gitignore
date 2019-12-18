@@ -1,0 +1,10 @@
+*.pyc
+*.egg-info
+build
+.egg
+.tox
+dist
+*.key
+*.crt
+*.p12
+pwd
