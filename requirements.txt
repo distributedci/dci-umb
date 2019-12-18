@@ -1,0 +1,2 @@
+requests==2.6.0
+python-qpid-proton==0.24.0
