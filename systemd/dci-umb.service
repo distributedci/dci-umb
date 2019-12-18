@@ -1,0 +1,5 @@
+[Service]
+Type=simple
+ExecStart=/usr/bin/dci-umb
+Restart=on-failure
+RestartSec=5s
