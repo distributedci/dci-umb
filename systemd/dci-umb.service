@@ -1,5 +1,5 @@
 [Service]
 Type=simple
-ExecStart=/usr/bin/dci-umb --key /etc/dci-umb/umb.key --crt /etc/dci-umb/umb.crt --ca /etc/pki/ca-trust/source/anchors/RH-IT-Root-CA.crt --broker amqps://messaging-devops-broker02.web.prod.ext.phx2.redhat.com:5671 --source topic://VirtualTopic.eng.rtt.ci --destination http://feeder.distributed-ci.io/api/v1/events
+ExecStart=/usr/bin/dci-umb --key /etc/dci-umb/umb.key --crt /etc/dci-umb/umb.crt --ca /etc/pki/ca-trust/source/anchors/RH-IT-Root-CA.crt --broker amqps://messaging-devops-broker01.web.prod.ext.phx2.redhat.com:5671  --broker amqps://messaging-devops-broker02.web.prod.ext.phx2.redhat.com:5671  --source topic://VirtualTopic.eng.rtt.ci --destination http://feeder.distributed-ci.io/api/v1/events
 Restart=on-failure
 RestartSec=5s
