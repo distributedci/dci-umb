@@ -27,7 +27,7 @@ DCI UMB used to listen on UMB events for dci-feeder-api
 
 %install
 %py2_install
-install -p -D -m0644 systemd/config.env %{buildroot}%{_sysconfdir}/%{name}/config.env
+install -p -D -m0644 systemd/config %{buildroot}%{_sysconfdir}/%{name}/config
 install -p -D -m0644 systemd/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
 %post
@@ -45,10 +45,10 @@ install -p -D -m0644 systemd/%{name}.service %{buildroot}%{_unitdir}/%{name}.ser
 %{python2_sitelib}/*
 %{_bindir}/%{name}
 %{_unitdir}/%{name}.service
-%config(noreplace) %{_sysconfdir}/%{name}/config.env
+%config(noreplace) %{_sysconfdir}/%{name}/config
 
 %changelog
 * Thu Dec 19 2019 Guillaume Vincent <gvincent@redhat.com> - 0.2.0-1
-- Add config.env file
+- Add config file
 * Wed Dec 18 2019 Haïkel Guémar <hguemar@redhat.com> - 0.1.0-1
 - Initial release

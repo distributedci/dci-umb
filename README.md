@@ -18,7 +18,7 @@ $ dci-umb \
 
 ## Run as a service
 
-If you want to run dci-umb as a systemd service, you can edit `/etc/dci-umb/config.env` file and modify the config.
+If you want to run dci-umb as a systemd service, you can edit `/etc/dci-umb/config` file and modify the config.
 Then you can run `systemctl start dci-umb`
 
 ## Example
