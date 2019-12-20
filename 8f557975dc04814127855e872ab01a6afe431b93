@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42d59dac_e80879cd",
+        "filename": "bin/replay.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 166
+      },
+      "writtenOn": "2019-12-20T15:41:26Z",
+      "side": 1,
+      "message": "Not sure that this is the right location for documentation.",
+      "revId": "8f557975dc04814127855e872ab01a6afe431b93",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
