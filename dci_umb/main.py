@@ -26,7 +26,7 @@ from dci_umb.cli import parse_arguments
 
 def main():
     arguments = sys.argv[1:]
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
     try:
         cli_arguments = parse_arguments(arguments)
         Container(Receiver(cli_arguments)).run()
