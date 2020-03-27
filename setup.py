@@ -30,7 +30,7 @@ setuptools.setup(
     packages=["dci_umb"],
     author="Distributed CI team",
     author_email="distributed-ci@redhat.com",
-    description="DCI downloader module",
+    description="DCI umb module",
     long_description=long_description,
     install_requires=install_requires,
     url="https://github.com/redhat-cip/dci-umb",

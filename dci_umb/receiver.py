@@ -27,25 +27,24 @@ logger = logging.getLogger(__name__)
 
 
 class Receiver(MessagingHandler):
-    def __init__(self, settings):
+    def __init__(self, params):
         super(Receiver, self).__init__()
-        handlers = [HTTPBouncerMessageHandler(destination=settings.get("destination"))]
+        handlers = [HTTPBouncerMessageHandler(destination=params.get("destination"))]
         self.bus = Bus(handlers=handlers)
-        self.settings = settings
+        self.crt_file = params.get("crt_file")
+        self.key_file = params.get("key_file")
+        self.ca_file = params.get("ca_file")
+        self.brokers = params.get("brokers")
+        self.source = params.get("source")
 
     def on_start(self, event):
-        logger.debug("UMB receiver on_start")
+        logger.debug("on_start")
         domain = SSLDomain(SSLDomain.MODE_CLIENT)
-        crt_file = self.settings.get("crt_file")
-        key_file = self.settings.get("key_file")
-        ca_file = self.settings.get("ca_file")
-        domain.set_credentials(crt_file, key_file, None)
-        domain.set_trusted_ca_db(ca_file)
+        domain.set_credentials(self.crt_file, self.key_file, None)
+        domain.set_trusted_ca_db(self.ca_file)
         domain.set_peer_authentication(SSLDomain.VERIFY_PEER)
-        brokers = self.settings.get("brokers")
-        conn = event.container.connect(urls=brokers, ssl_domain=domain)
-        source = self.settings.get("source")
-        event.container.create_receiver(conn, source=source)
+        conn = event.container.connect(urls=self.brokers, ssl_domain=domain)
+        event.container.create_receiver(conn, source=self.source)
 
     def on_message(self, event):
         self.bus.dispatch_event(event)
