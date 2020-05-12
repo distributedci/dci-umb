@@ -35,7 +35,7 @@ class Receiver(MessagingHandler):
         self.key_file = params.get("key_file")
         self.ca_file = params.get("ca_file")
         self.brokers = params.get("brokers")
-        self.source = params.get("source")
+        self.sources = params.get("sources")
 
     def on_start(self, event):
         logger.debug("on_start")
@@ -44,7 +44,8 @@ class Receiver(MessagingHandler):
         domain.set_trusted_ca_db(self.ca_file)
         domain.set_peer_authentication(SSLDomain.VERIFY_PEER)
         conn = event.container.connect(urls=self.brokers, ssl_domain=domain)
-        event.container.create_receiver(conn, source=self.source)
+        for source in self.sources:
+            event.container.create_receiver(conn, source=source)
 
     def on_message(self, event):
         self.bus.dispatch_event(event)
