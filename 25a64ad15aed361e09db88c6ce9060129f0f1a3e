@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c925c329_26a34eef",
+        "filename": "dci_umb/cli.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2020-05-13T15:20:22Z",
+      "side": 1,
+      "message": "Would not split(\" \") be better ?",
+      "range": {
+        "startLine": 64,
+        "startChar": 66,
+        "endLine": 64,
+        "endChar": 75
+      },
+      "revId": "25a64ad15aed361e09db88c6ce9060129f0f1a3e",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
