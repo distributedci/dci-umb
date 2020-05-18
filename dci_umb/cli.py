@@ -58,10 +58,15 @@ def parse_arguments(arguments):
         help="amqps broker to listen to",
     )
     default_topic_source = os.environ.get("TOPIC_SOURCE", None)
+    if default_topic_source:
+        default_topic_sources = [default_topic_source]
+    else:
+        default_topic_sources = os.environ.get("TOPIC_SOURCES", "").split()
     parser.add_argument(
         "--source",
-        default=default_topic_source,
-        dest="source",
+        default=default_topic_sources,
+        dest="sources",
+        action="append",
         metavar="TOPIC_SOURCE",
         help="virtual topic source to listen to",
     )

@@ -1,5 +1,5 @@
 Name:             dci-umb
-Version:          0.3.0
+Version:          0.4.0
 Release:          1.VERS%{?dist}
 Summary:          DCI UMB
 License:          ASL 2.0
@@ -48,6 +48,8 @@ install -p -D -m0644 systemd/%{name}.service %{buildroot}%{_unitdir}/%{name}.ser
 %config(noreplace) %{_sysconfdir}/%{name}/config
 
 %changelog
+* Tue May 12 2020 Guillaume Vincent <gvincent@redhat.com> - 0.4.0-1
+- Add multiple sources
 * Fri Mar 27 2020 Guillaume Vincent <gvincent@redhat.com> - 0.3.0-1
 - Add sender class
 * Thu Dec 19 2019 Guillaume Vincent <gvincent@redhat.com> - 0.2.0-1
