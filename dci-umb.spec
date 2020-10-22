@@ -1,19 +1,34 @@
+%if 0%{?rhel} && 0%{?rhel} < 8
+%global with_python2 1
+%else
+%global with_python3 1
+%endif
+
 Name:             dci-umb
 Version:          0.4.0
-Release:          1.VERS%{?dist}
+Release:          2.VERS%{?dist}
 Summary:          DCI UMB
 License:          ASL 2.0
 URL:              https://github.com/redhat-cip/%{name}
 BuildArch:        noarch
 Source0:          %{name}-%{version}.tar.gz
 
+BuildRequires:    systemd
+%if 0%{?with_python2}
 BuildRequires:    python2-devel
 BuildRequires:    python2-setuptools
 BuildRequires:    python-requests
 BuildRequires:    python-qpid-proton
-BuildRequires:    systemd
 Requires:         python-requests
 Requires:         python-qpid-proton
+%else
+BuildRequires:    python3-devel
+BuildRequires:    python3-setuptools
+BuildRequires:    python3-requests
+BuildRequires:    python3-qpid-proton
+Requires:         python3-requests
+Requires:         python3-qpid-proton
+%endif
 %{?systemd_requires}
 
 %description
@@ -23,10 +38,18 @@ DCI UMB used to listen on UMB events for dci-feeder-api
 %autosetup -n %{name}-%{version}
 
 %build
+%if 0%{?with_python2}
 %py2_build
+%else
+%py3_build
+%endif
 
 %install
+%if 0%{?with_python2}
 %py2_install
+%else
+%py3_install
+%endif
 install -p -D -m0644 systemd/config %{buildroot}%{_sysconfdir}/%{name}/config
 install -p -D -m0644 systemd/%{name}.service %{buildroot}%{_unitdir}/%{name}.service
 
@@ -42,12 +65,18 @@ install -p -D -m0644 systemd/%{name}.service %{buildroot}%{_unitdir}/%{name}.ser
 %files
 %license LICENSE
 %doc README.md
+%if 0%{?with_python2}
 %{python2_sitelib}/*
+%else
+%{python3_sitelib}/*
+%endif
 %{_bindir}/%{name}
 %{_unitdir}/%{name}.service
 %config(noreplace) %{_sysconfdir}/%{name}/config
 
 %changelog
+* Thu Oct 22 2020 Haïkel Guémar <hguemar@fedoraproject.org> - 0.4.0-2
+- Add EL8 support
 * Tue May 12 2020 Guillaume Vincent <gvincent@redhat.com> - 0.4.0-1
 - Add multiple sources
 * Fri Mar 27 2020 Guillaume Vincent <gvincent@redhat.com> - 0.3.0-1
