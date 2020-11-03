@@ -5,8 +5,8 @@
 %endif
 
 Name:             dci-umb
-Version:          0.4.0
-Release:          2.VERS%{?dist}
+Version:          0.4.1
+Release:          1.VERS%{?dist}
 Summary:          DCI UMB
 License:          ASL 2.0
 URL:              https://github.com/redhat-cip/%{name}
@@ -75,6 +75,8 @@ install -p -D -m0644 systemd/%{name}.service %{buildroot}%{_unitdir}/%{name}.ser
 %config(noreplace) %{_sysconfdir}/%{name}/config
 
 %changelog
+* Tue Nov 03 2020 Guillaume Vincent <gvincent@redhat.com> - 0.4.1-1
+- Close connection after sending UMB event
 * Thu Oct 22 2020 Haïkel Guémar <hguemar@fedoraproject.org> - 0.4.0-2
 - Add EL8 support
 * Tue May 12 2020 Guillaume Vincent <gvincent@redhat.com> - 0.4.0-1

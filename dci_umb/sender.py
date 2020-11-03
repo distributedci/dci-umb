@@ -43,6 +43,9 @@ class Sender(MessagingHandler):
         event.sender.send(Message(body=self.message))
         event.sender.close()
 
+    def on_accepted(self, event): 
+        event.connection.close()
+
 
 def send(params):
     Container(Sender(params)).run()
