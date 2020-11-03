@@ -15,10 +15,15 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
+import logging
+
 from proton import SSLDomain
 from proton.handlers import MessagingHandler
 from proton.reactor import Container
 from proton import Message
+
+
+logger = logging.getLogger(__name__)
 
 
 class Sender(MessagingHandler):
@@ -32,6 +37,7 @@ class Sender(MessagingHandler):
         self.message = params.get("message")
 
     def on_start(self, event):
+        logger.debug("on_start")
         domain = SSLDomain(SSLDomain.MODE_CLIENT)
         domain.set_credentials(self.crt_file, self.key_file, None)
         domain.set_trusted_ca_db(self.ca_file)
@@ -40,8 +46,14 @@ class Sender(MessagingHandler):
         event.container.create_sender(conn, target=self.target)
 
     def on_sendable(self, event):
+        logger.debug("on_sendable: send message")
+        logger.debug(self.message)
         event.sender.send(Message(body=self.message))
         event.sender.close()
+
+    def on_accepted(self, event):
+        logger.debug("on_accepted: message accepted")
+        event.connection.close()
 
 
 def send(params):
