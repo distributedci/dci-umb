@@ -20,7 +20,7 @@ def test_bus_dispatch_an_event_to_only_interested_handlers():
     handler2.is_interested_in.return_value = True
 
     bus = Bus([handler1, handler2])
-    event = Event({"topic": "/topic/VirtualTopic.eng.rtt.ci"})
+    event = Event({"topic": "/topic/VirtualTopic.eng.rtt.ci"}, {})
     bus.dispatch_event(event)
 
     handler1.handle_event.assert_not_called()
@@ -36,7 +36,7 @@ def test_bus_ignore_error_occuring_in_an_handler():
     handler2.is_interested_in.return_value = True
 
     bus = Bus([handler1, handler2])
-    event = Event({"topic": "/topic/VirtualTopic.eng.rtt.ci"})
+    event = Event({"topic": "/topic/VirtualTopic.eng.rtt.ci"}, {})
     bus.dispatch_event(event)
 
     handler1.handle_event.assert_called_once_with(event)
