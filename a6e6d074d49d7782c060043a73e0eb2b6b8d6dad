@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03367351_17f32d96",
+        "filename": "dci_umb/handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 405
+      },
+      "writtenOn": "2021-11-25T08:01:53Z",
+      "side": 1,
+      "message": "_format is not used, can be removed IMO",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 29
+      },
+      "revId": "a6e6d074d49d7782c060043a73e0eb2b6b8d6dad",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d3fad41_30249d9e",
+        "filename": "tests/test_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 405
+      },
+      "writtenOn": "2021-11-25T08:01:53Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 23,
+        "startChar": 12,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "a6e6d074d49d7782c060043a73e0eb2b6b8d6dad",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": true
+    }
+  ]
+}
