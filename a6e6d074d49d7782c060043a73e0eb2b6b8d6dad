@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "03367351_17f32d96",
         "filename": "dci_umb/handler.py",
@@ -20,10 +21,34 @@
         "endChar": 29
       },
       "revId": "a6e6d074d49d7782c060043a73e0eb2b6b8d6dad",
-      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
-      "unresolved": true
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7567b18_5890aaff",
+        "filename": "dci_umb/handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2022-01-28T13:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03367351_17f32d96",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 29
+      },
+      "revId": "a6e6d074d49d7782c060043a73e0eb2b6b8d6dad",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "9d3fad41_30249d9e",
         "filename": "tests/test_handler.py",
@@ -43,8 +68,31 @@
         "endChar": 25
       },
       "revId": "a6e6d074d49d7782c060043a73e0eb2b6b8d6dad",
-      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
-      "unresolved": true
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5697c31_eae6b792",
+        "filename": "tests/test_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2022-01-28T13:49:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d3fad41_30249d9e",
+      "range": {
+        "startLine": 23,
+        "startChar": 12,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "a6e6d074d49d7782c060043a73e0eb2b6b8d6dad",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0"
     }
   ]
 }
