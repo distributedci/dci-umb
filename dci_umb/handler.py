@@ -21,11 +21,10 @@ class HTTPBouncerMessageHandler(Handler):
 
     def handle_event(self, event):
         body = event.message.body.decode("utf-8")
-        properties = event.message.properties.decode("utf-8")
         requests.post(
             self.destination,
             json={
-                "headers": json.loads(properties),
+                "headers": event.message.properties,
                 "msg": json.loads(body),
             },
         )
