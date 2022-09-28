@@ -1,5 +1,9 @@
 import json
+import logging
 import requests
+
+
+logger = logging.getLogger(__name__)
 
 
 class Handler(object):
@@ -21,10 +25,11 @@ class HTTPBouncerMessageHandler(Handler):
 
     def handle_event(self, event):
         body = event.message.body.decode("utf-8")
-        requests.post(
-            self.destination,
-            json={
+        try:
+            json = {
                 "headers": event.message.properties,
                 "msg": json.loads(body),
-            },
-        )
+            }
+            requests.post(self.destination, json=json)
+        except ValueError:
+            logger.error("Can't json load event message body: %s" % body)
