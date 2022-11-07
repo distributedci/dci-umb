@@ -5,7 +5,7 @@
 %endif
 
 Name:             dci-umb
-Version:          0.4.1
+Version:          0.4.2
 Release:          1.VERS%{?dist}
 Summary:          DCI UMB
 License:          ASL 2.0
@@ -17,15 +17,10 @@ BuildRequires:    systemd
 %if 0%{?with_python2}
 BuildRequires:    python2-devel
 BuildRequires:    python2-setuptools
-BuildRequires:    python-requests
-BuildRequires:    python-qpid-proton
 Requires:         python-requests
 Requires:         python-qpid-proton
 %else
 BuildRequires:    python3-devel
-BuildRequires:    python3-setuptools
-BuildRequires:    python3-requests
-BuildRequires:    python3-qpid-proton
 Requires:         python3-requests
 Requires:         python3-qpid-proton
 %endif
@@ -75,6 +70,8 @@ install -p -D -m0644 systemd/%{name}.service %{buildroot}%{_unitdir}/%{name}.ser
 %config(noreplace) %{_sysconfdir}/%{name}/config
 
 %changelog
+* Mon Nov 07 2022 Guillaume Vincent <gvincent@redhat.com> - 0.4.2-1
+- Fix build for EL9
 * Tue Nov 03 2020 Guillaume Vincent <gvincent@redhat.com> - 0.4.1-1
 - Close connection after sending UMB event
 * Thu Oct 22 2020 Haïkel Guémar <hguemar@fedoraproject.org> - 0.4.0-2
