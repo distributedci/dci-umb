@@ -6,5 +6,6 @@ build
 dist
 *.key
 *.crt
+!RH-IT-Root-CA.crt
 *.p12
 pwd
