@@ -11,7 +11,7 @@ Summary:          DCI UMB
 License:          ASL 2.0
 URL:              https://github.com/redhat-cip/%{name}
 BuildArch:        noarch
-Source0:          %{name}-%{version}.tar.gz
+Source0:          %{name}-%{version}.dev0+VERS.tar.gz
 
 BuildRequires:    systemd
 %if 0%{?with_python2}
@@ -30,7 +30,7 @@ Requires:         python3-qpid-proton
 DCI UMB used to listen on UMB events for dci-feeder-api
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -n %{name}-%{version}.dev0+VERS
 
 %build
 %if 0%{?with_python2}
