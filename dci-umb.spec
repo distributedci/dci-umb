@@ -6,12 +6,12 @@
 
 Name:             dci-umb
 Version:          0.4.2
-Release:          1.VERS%{?dist}
+Release:          2.VERS%{?dist}
 Summary:          DCI UMB
 License:          ASL 2.0
 URL:              https://github.com/redhat-cip/%{name}
 BuildArch:        noarch
-Source0:          %{name}-%{version}.tar.gz
+Source0:          %{name}-%{version}.postDATE.tar.gz
 
 BuildRequires:    systemd
 PreReq:           dci-release >= 0.2.0
@@ -31,7 +31,7 @@ Requires:         python3-qpid-proton
 DCI UMB used to listen on UMB events for dci-feeder-api
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -n %{name}-%{version}.postDATE
 
 %build
 %if 0%{?with_python2}
@@ -71,6 +71,8 @@ install -p -D -m0644 systemd/%{name}.service %{buildroot}%{_unitdir}/%{name}.ser
 %config(noreplace) %{_sysconfdir}/%{name}/config
 
 %changelog
+* Wed Nov 15 2023 Haïkel Guémar <hguemar@redhat.com> - 0.4.2-2
+- use the new build process compatible with PEP-0440
 * Mon Nov 07 2022 Guillaume Vincent <gvincent@redhat.com> - 0.4.2-1
 - Fix build for EL9
 * Tue Nov 03 2020 Guillaume Vincent <gvincent@redhat.com> - 0.4.1-1
