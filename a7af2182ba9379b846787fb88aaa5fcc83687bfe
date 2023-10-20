@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dfe1b55_cf4cf8dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2023-10-20T17:37:34Z",
+      "side": 1,
+      "message": "Already triggered one there: https://softwarefactory-project.io/r/c/dci-umb/+/29839",
+      "revId": "a7af2182ba9379b846787fb88aaa5fcc83687bfe",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0"
+    }
+  ]
+}
