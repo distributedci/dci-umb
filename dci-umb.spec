@@ -14,6 +14,7 @@ BuildArch:        noarch
 Source0:          %{name}-%{version}.tar.gz
 
 BuildRequires:    systemd
+PreReq:           dci-release >= 0.2.0
 %if 0%{?with_python2}
 BuildRequires:    python2-devel
 BuildRequires:    python2-setuptools
