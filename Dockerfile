@@ -5,13 +5,17 @@ LABEL maintainer="DCI Team <distributed-ci@redhat.com>"
 
 ENV LANG en_US.UTF-8
 
-COPY . /opt/dci-umb
+RUN mkdir /opt/dci-umb
 
-RUN microdnf -y install python3.11 python3.11-pip&& \
+COPY . /opt/dci-umb/
+
+RUN set -x && cd /opt/dci-umb && ls -l && \
+    microdnf -y install python3.11 python3.11-pip && \
     rpm -qa | sort > /tmp/rpms_before && \
-    microdnf install python3.11-devel openssl-devel python3.11-wheel gcc findutils && \
+    microdnf install python3.11-devel openssl-devel python3.11-wheel gcc findutils git-core && \
     rpm -qa | sort > /tmp/rpms_after && \
-    python3 -m pip install /opt/dci-umb && \
+    ls -l && PYTHONPATH=/opt/dci-umb/dci-packaging python3 setup.py sdist && \
+    PYTHONPATH=/opt/dci-umb/dci-packaging python3 -m pip install /opt/dci-umb && \
     comm -13 /tmp/rpms_before /tmp/rpms_after | xargs microdnf remove && \
     microdnf clean all && \
     rm -r /opt/dci-umb

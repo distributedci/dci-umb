@@ -5,3 +5,6 @@
 !requirements.txt
 !setup.py
 !RH-IT-Root-CA.crt
+!dci-umb.spec
+!dci-packaging
+!.git
