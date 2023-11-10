@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright 2017 Red Hat, Inc.
+# Copyright 2017-2023 Red Hat, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the 'License'); you may
 # not use this file except in compliance with the License. You may obtain
@@ -17,6 +17,22 @@
 import os
 import setuptools
 
+# dcibuild can be loaded only when doing the sdist sub-command because
+# dci-packaging is extracted at the same level. When doing the other
+# sub-commands like build, we extract the version from version.py.
+try:
+    from dcibuild import sdist, get_version
+
+    sdist.dci_mod = "dci_umb"
+except:
+    sdist = None
+
+    def get_version():
+        from dci_umb import version
+
+        return version.__version__
+
+
 from dci_umb import version
 
 root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -26,7 +42,7 @@ install_requires = [r.split("==")[0] for r in requirements.split("\n")]
 
 setuptools.setup(
     name="dci-umb",
-    version=version.__version__,
+    version=get_version(),
     packages=["dci_umb"],
     author="Distributed CI team",
     author_email="distributed-ci@redhat.com",
@@ -43,4 +59,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
     ],
     entry_points={"console_scripts": ["dci-umb = dci_umb.main:main"]},
+    cmdclass={
+        "sdist": sdist,
+    },
 )
