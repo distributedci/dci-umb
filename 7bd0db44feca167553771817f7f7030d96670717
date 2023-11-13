@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75e79f82_3cb8ada7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 28
+      },
+      "writtenOn": "2023-11-13T09:38:19Z",
+      "side": 1,
+      "message": "@Frédéric, we\u0027re planning on stopping producing any RPM for dci-umb.\n\nI\u0027m wondering if we sould just remove the .spec and building the RPM now instead of this change ?",
+      "revId": "7bd0db44feca167553771817f7f7030d96670717",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0"
+    }
+  ]
+}
