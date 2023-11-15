@@ -16,6 +16,24 @@
       "message": "@Frédéric, we\u0027re planning on stopping producing any RPM for dci-umb.\n\nI\u0027m wondering if we sould just remove the .spec and building the RPM now instead of this change ?",
       "revId": "7bd0db44feca167553771817f7f7030d96670717",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c610f32_4a1c41e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 20
+      },
+      "writtenOn": "2023-11-15T08:53:34Z",
+      "side": 1,
+      "message": "\u003e @Frédéric, we\u0027re planning on stopping producing any RPM for dci-umb.\n\u003e \n\u003e I\u0027m wondering if we sould just remove the .spec and building the RPM now instead of this change ?\n\nI don\u0027t get your point as this change is to be able to push to pypi. I\u0027m ok to abandon it and let you manage it.",
+      "parentUuid": "75e79f82_3cb8ada7",
+      "revId": "7bd0db44feca167553771817f7f7030d96670717",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0"
     }
   ]
 }
