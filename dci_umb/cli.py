@@ -71,10 +71,17 @@ def parse_arguments(arguments):
         help="virtual topic source to listen to",
     )
     default_http_destination_host = os.environ.get("HTTP_DESTINATION_HOST", None)
+    if default_http_destination_host:
+        default_http_destination_host = [default_http_destination_host]
+    else:
+        default_http_destination_host = os.environ.get(
+            "HTTP_DESTINATION_HOSTS", ""
+        ).split()
     parser.add_argument(
         "--destination",
+        action="append",
         default=default_http_destination_host,
-        dest="destination",
+        dest="destinations",
         metavar="HTTP_DESTINATION_HOST",
         help="destination for the bounced events",
     )

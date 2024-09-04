@@ -31,6 +31,7 @@ class HTTPBouncerMessageHandler(Handler):
                     "headers": event.message.properties,
                     "msg": json.loads(event.message.body),
                 },
+                timeout=(3, 5),
             )
         except ValueError:
             logger.error("Can't json load event message body: %s" % event.message.body)
