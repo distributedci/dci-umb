@@ -29,7 +29,7 @@ def test_parse_arguments():
         "amqps://broker02.example.org:5671",
     ]
     assert args["sources"] == ["topic://VirtualTopic.*>"]
-    assert args["destination"] == "http://localhost:5000/api/v1/events"
+    assert args["destinations"] == ["http://localhost:5000/api/v1/events"]
 
 
 def test_parse_arguments_from_env_variable():
@@ -53,7 +53,7 @@ def test_parse_arguments_from_env_variable():
             "amqps://broker02.example.org:5671",
         ]
         assert args["sources"] == ["topic://VirtualTopic.*>"]
-        assert args["destination"] == "http://localhost:5000/api/v1/events"
+        assert args["destinations"] == ["http://localhost:5000/api/v1/events"]
 
 
 def test_parse_arguments_from_env_variable_api_v2():
@@ -77,4 +77,33 @@ def test_parse_arguments_from_env_variable_api_v2():
             "amqps://broker02.example.org:5671",
         ]
         assert args["sources"] == ["topic://VirtualTopic.a", "topic://VirtualTopic.b"]
-        assert args["destination"] == "http://localhost:5000/api/v1/events"
+        assert args["destinations"] == ["http://localhost:5000/api/v1/events"]
+
+
+def test_parse_arguments_multiple_destinations():
+    args = parse_arguments(
+        [
+            "--destination",
+            "http://localhost:5000/api/v1/events",
+            "--destination",
+            "http://remote_host:5000/api/v1/events",
+        ]
+    )
+    assert args["destinations"] == [
+        "http://localhost:5000/api/v1/events",
+        "http://remote_host:5000/api/v1/events",
+    ]
+
+
+def test_parse_arguments_from_env_variable_api_v2_multiple_destinations():
+    with patch.dict(
+        "os.environ",
+        {
+            "HTTP_DESTINATION_HOSTS": "http://localhost:5000/api/v1/events http://remote_host:5000/api/v1/events",
+        },
+    ):
+        args = parse_arguments([])
+        assert args["destinations"] == [
+            "http://localhost:5000/api/v1/events",
+            "http://remote_host:5000/api/v1/events",
+        ]

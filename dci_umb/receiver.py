@@ -29,7 +29,9 @@ logger = logging.getLogger(__name__)
 class Receiver(MessagingHandler):
     def __init__(self, params):
         super(Receiver, self).__init__()
-        handlers = [HTTPBouncerMessageHandler(destination=params.get("destination"))]
+        handlers = []
+        for destination in params.get("destinations"):
+            handlers.append(HTTPBouncerMessageHandler(destination=destination))
         self.bus = Bus(handlers=handlers)
         self.crt_file = params.get("crt_file")
         self.key_file = params.get("key_file")
