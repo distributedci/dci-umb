@@ -24,7 +24,7 @@ class HTTPBouncerMessageHandler(Handler):
         return True
 
     def handle_event(self, event):
-        message_id = event.message.properties["message-id"]
+        message_id = event.message.id
         message_body = event.message.body
         if isinstance(message_body, memoryview):
             message_body = message_body.tobytes()
