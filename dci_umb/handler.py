@@ -24,14 +24,21 @@ class HTTPBouncerMessageHandler(Handler):
         return True
 
     def handle_event(self, event):
+        message_id = event.message.properties["message-id"]
         try:
-            requests.post(
+            r = requests.post(
                 self.destination,
                 json={
                     "headers": event.message.properties,
                     "msg": json.loads(event.message.body),
                 },
-                timeout=(3, 5),
+                timeout=(10, 50),
             )
-        except ValueError:
-            logger.error("Can't json load event message body: %s" % event.message.body)
+            logger.info(
+                f"Sent {message_id} to {self.destination} - Result: {r.status_code}"
+            )
+        except (ValueError, TypeError):
+            logger.error(
+                "Can't json load event id %s - message body (%s): %s"
+                % (message_id, type(event.message.body), event.message.body)
+            )

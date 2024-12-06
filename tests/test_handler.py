@@ -23,5 +23,5 @@ def test_HTTPBouncerMessageHandler_send_body_in_post_request(mocked_requests_pos
             "msg": {"id": "e1"},
             "headers": {"message-id": "ID:id1234"},
         },
-        timeout=(3, 5),
+        timeout=(10, 50),
     )
