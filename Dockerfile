@@ -1,6 +1,6 @@
 FROM registry.access.redhat.com/ubi8/ubi-minimal
 
-LABEL name="DCI UMB" version="0.0.1"
+LABEL name="DCI UMB" version="0.0.2"
 LABEL maintainer="DCI Team <distributed-ci@redhat.com>"
 
 ENV LANG en_US.UTF-8
@@ -17,7 +17,7 @@ RUN microdnf -y upgrade && \
   microdnf clean all && \
   rm -r /opt/dci-umb
 
-COPY RH-IT-Root-CA.crt /etc/pki/ca-trust/source/anchors/RH-IT-Root-CA.crt
+COPY RH-IT-Root-CA.crt 2022-IT-Root-CA.pem /etc/pki/ca-trust/source/anchors/
 RUN update-ca-trust
 
 CMD ["/usr/local/bin/dci-umb"]
