@@ -10,7 +10,7 @@ def test_parse_arguments():
             "--crt",
             "/tmp/prod.crt",
             "--ca",
-            "/tmp/RH-IT-Root-CA.crt",
+            "/tmp/2022-IT-Root-CA.pem",
             "--broker",
             "amqps://broker01.example.org:5671",
             "--broker",
@@ -23,7 +23,7 @@ def test_parse_arguments():
     )
     assert args["key_file"] == "/tmp/prod.key"
     assert args["crt_file"] == "/tmp/prod.crt"
-    assert args["ca_file"] == "/tmp/RH-IT-Root-CA.crt"
+    assert args["ca_file"] == "/tmp/2022-IT-Root-CA.pem"
     assert args["brokers"] == [
         "amqps://broker01.example.org:5671",
         "amqps://broker02.example.org:5671",

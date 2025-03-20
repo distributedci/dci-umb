@@ -5,4 +5,5 @@
 !requirements.txt
 !setup.py
 !RH-IT-Root-CA.crt
+!2022-IT-Root-CA.pem
 !dci-umb.spec
