@@ -1,0 +1,8 @@
+---
+- project:
+    check-github.com:
+      jobs:
+        - dci-upload-expiring-container-image-job
+    gate-github.com:
+      jobs:
+        - noop
