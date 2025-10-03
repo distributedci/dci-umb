@@ -2,8 +2,6 @@ FROM registry.access.redhat.com/ubi8/ubi-minimal
 
 LABEL name="DCI UMB" version="0.0.2"
 LABEL maintainer="DCI Team <distributed-ci@redhat.com>"
-ARG QUAY_EXPIRES_AFTER=never
-LABEL quay.expires-after=${QUAY_EXPIRES_AFTER}
 
 ENV LANG en_US.UTF-8
 
