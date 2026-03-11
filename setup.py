@@ -57,7 +57,5 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
     ],
     entry_points={"console_scripts": ["dci-umb = dci_umb.main:main"]},
-    cmdclass={
-        "sdist": sdist,
-    },
+    cmdclass={} if sdist is None else {"sdist": sdist},
 )
