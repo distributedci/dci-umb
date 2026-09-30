@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright 2017 Red Hat, Inc.
@@ -14,48 +14,33 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
-import os
+import importlib.util
+from pathlib import Path
+
 import setuptools
 
-# dcibuild can be loaded only when doing the sdist sub-command because
-# dci-packaging is extracted at the same level. When doing the other
-# sub-commands like build, we extract the version from version.py.
-try:
-    from dcibuild import sdist, get_version
 
-    sdist.dci_mod = "dci_umb"
-except:
-    sdist = None
-
-    def get_version():
-        from dci_umb import version
-
-        return version.__version__
-
-
-root_dir = os.path.dirname(os.path.abspath(__file__))
-long_description = open(os.path.join(root_dir, "README.md")).read()
-requirements = open(os.path.join(root_dir, "requirements.txt")).read()
-install_requires = [r.split("==")[0] for r in requirements.split("\n")]
+version_path = Path(__file__).parent / "dci_kafka" / "version.py"
+version_spec = importlib.util.spec_from_file_location("dci_kafka_version", version_path)
+version_module = importlib.util.module_from_spec(version_spec)
+version_spec.loader.exec_module(version_module)
 
 setuptools.setup(
-    name="dci-umb",
-    version=get_version(),
-    packages=["dci_umb"],
+    name="dci-kafka",
+    version=version_module.__version__,
+    packages=setuptools.find_packages(),
     author="Distributed CI team",
     author_email="distributed-ci@redhat.com",
-    description="DCI umb module",
-    long_description=long_description,
+    description="Forward Kafka events to DCI Feeder",
+    long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    install_requires=install_requires,
-    url="https://github.com/redhat-cip/dci-umb",
+    install_requires=["kafka-python", "python-snappy", "requests"],
+    url="https://github.com/redhat-cip/dci-kafka",
     license="Apache v2.0",
     classifiers=[
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: POSIX :: Linux",
-        "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
     ],
-    entry_points={"console_scripts": ["dci-umb = dci_umb.main:main"]},
-    cmdclass={} if sdist is None else {"sdist": sdist},
+    entry_points={"console_scripts": ["dci-kafka-consumer=dci_kafka.consumer:main"]},
 )
