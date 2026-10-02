@@ -1,9 +1,9 @@
 *
-!dci_umb
+!dci_kafka
+!dci_kafka/**
 !MANIFEST.in
 !README.md
 !requirements.txt
 !setup.py
 !RH-IT-Root-CA.crt
 !2022-IT-Root-CA.pem
-!dci-umb.spec

@@ -1,23 +1,19 @@
-FROM registry.access.redhat.com/ubi8/ubi-minimal
+FROM registry.access.redhat.com/ubi10/ubi-minimal
 
-LABEL name="DCI UMB" version="0.0.2"
+LABEL name="DCI Kafka" version="0.1.0"
 LABEL maintainer="DCI Team <distributed-ci@redhat.com>"
 
 ENV LANG en_US.UTF-8
 
-COPY . /opt/dci-umb
+COPY . /opt/dci-kafka
 
 RUN microdnf -y upgrade && \
-  microdnf install python3.11 python3.11-pip && \
-  rpm -qa | sort > /tmp/rpms_before && \
-  microdnf install python3.11-devel openssl-devel python3.11-wheel gcc findutils && \
-  rpm -qa | sort > /tmp/rpms_after && \
-  python3 -m pip install /opt/dci-umb && \
-  comm -13 /tmp/rpms_before /tmp/rpms_after | xargs microdnf remove && \
+  microdnf -y install python3.12 python3.12-pip && \
+  python3 -m pip install /opt/dci-kafka && \
   microdnf clean all && \
-  rm -r /opt/dci-umb
+  rm -r /opt/dci-kafka
 
 COPY RH-IT-Root-CA.crt 2022-IT-Root-CA.pem /etc/pki/ca-trust/source/anchors/
 RUN update-ca-trust
 
-CMD ["/usr/local/bin/dci-umb"]
+CMD ["/usr/local/bin/dci-kafka-consumer"]

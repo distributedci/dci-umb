@@ -1,9 +1,0 @@
-[Service]
-Type=simple
-EnvironmentFile=-/etc/dci-umb/config
-ExecStart=/usr/bin/dci-umb
-Restart=always
-RestartSec=5s
-
-[Install]
-WantedBy=multi-user.target

@@ -1,49 +1,50 @@
-# DCI UMB
+# DCI Kafka
 
-DCI UMB is a tool that listen on an amqps broker, filter on a specific topic and propagate any event via http post request.
+DCI Kafka consumes events from Kafka and forwards them to DCI Feeder over HTTP.
 
-## TLDR
+## Reliability model
+
+All service instances must use the same Kafka consumer group so each event is
+processed by only one instance.
+
+Kafka auto-commit is enabled. Invalid messages and events that still fail after
+all HTTP attempts are logged and skipped. There is no DLQ or automatic replay.
+
+HTTP retries can cause duplicate deliveries when a response is lost after the
+Feeder accepted the request. Kafka rebalances can also cause the same event to
+be processed by multiple instances. The receiving endpoint must therefore be
+idempotent.
+
+## Configuration
+
+The following environment variables are required:
+
+- `KAFKA_BOOTSTRAP_SERVERS`: comma-separated Kafka bootstrap servers
+- `KAFKA_CONSUMER_TOPICS`: comma-separated topics to consume
+- `DCI_FEEDER_URL`: complete DCI Feeder destination URL
+- `KAFKA_SASL_USERNAME`: SASL username
+- `KAFKA_SASL_PASSWORD`: SASL password
+
+Optional variables:
+
+- `KAFKA_CONSUMER_GROUP_ID` defaults to `DCI-FEEDER-CONSUMER`; use the same
+  value on every instance
+- `KAFKA_AUTO_OFFSET_RESET` defaults to `earliest`
+- `KAFKA_SECURITY_PROTOCOL` defaults to `SASL_SSL`
+- `KAFKA_SASL_MECHANISM` defaults to `SCRAM-SHA-512`
+- `KAFKA_HTTP_MAX_ATTEMPTS` defaults to `3` and includes the initial request
+- `KAFKA_HTTP_BACKOFF_SECONDS` defaults to `1`
+- `KAFKA_MAX_POLL_INTERVAL_MS` defaults to `300000` and must exceed the maximum
+  HTTP processing duration
+
+
+## Run
 
 ```console
-$ sudo yum -y install https://packages.distributed-ci.io/dci-release.el7.noarch.rpm
-$ sudo yum -y install dci-umb
-$ dci-umb \
-  --key ./broker.key \
-  --crt ./broker.crt \
-  --ca ./broker.ca \
-  --broker amqps://example.org:5671 \
-  --source topic://VirtualTopic.eng \
-  --destination http://localhost:5000/events
+KAFKA_BOOTSTRAP_SERVERS=kafka.example.org:9093 \
+KAFKA_CONSUMER_TOPICS=rhdl.events \
+KAFKA_SASL_USERNAME=dci \
+KAFKA_SASL_PASSWORD=secret \
+DCI_FEEDER_URL=https://dci-feeder.example.org/events \
+dci-kafka-consumer
 ```
-
-## Run as a service
-
-If you want to run dci-umb as a systemd service, you can edit `/etc/dci-umb/config` file and modify the config.
-Then you can run `systemctl start dci-umb`
-
-## Example
-
-Create a python virtual environment
-
-    python3 -m venv venv
-    source venv/bin/activate
-
-Install dependencies
-
-    pip install -r sandbox/requirements.txt
-    pip install -r requirements.txt
-
-Start the sandbox server:
-
-    python sandbox/server.py
-
-In another terminal start dci-umb with parameters
-
-    source venv/bin/activate
-    PYTHONPATH=. python dci_umb/main.py \
-        --key ./broker.key \
-        --crt ./broker.crt \
-        --ca ./broker.ca \
-        --broker amqps://example.org:5671 \
-        --source topic://VirtualTopic.eng \
-        --destination http://localhost:5000/events
